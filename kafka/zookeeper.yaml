@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: zookeeper
   labels:
-    app: zookeeper-b
+    app: zookeeper
 spec:
   replicas: 1
   selector:
