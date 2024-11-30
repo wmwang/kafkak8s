@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: zookeeper
+        app: zookeeper-b
     spec:
       containers:
       - name: zookeeper
