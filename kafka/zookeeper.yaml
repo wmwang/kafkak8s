@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zookeeper-a
+  name: zookeeper-d
   labels:
-    app: zookeeper
+    app: zookeeper-e
 spec:
   replicas: 1
   selector:
