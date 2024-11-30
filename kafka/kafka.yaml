@@ -30,6 +30,7 @@ spec:
           value: PLAINTEXT://:9092
         - name: KAFKA_ADVERTISED_LISTENERS
           value: PLAINTEXT://kafka-a:9092
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
