@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 999
+    targetPort: 80
+  type: NodePLoadBalancerort # 如果需要外部訪問，選擇 NodePort 或 LoadBalancer
