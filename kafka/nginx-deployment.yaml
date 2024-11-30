@@ -55,7 +55,7 @@ data:
         listen       80;
         server_name  localhost;
         location / {
-          proxy_pass http://www.google.com;
+          proxy_pass https://www.google.com;
         }
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
