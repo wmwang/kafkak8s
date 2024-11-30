@@ -15,7 +15,7 @@ spec:
         app: kafka-a
     spec:
       containers:
-      - name: kafka
+      - name: kafka-a
         image: bitnami/kafka:latest
         ports:
         - containerPort: 9092
