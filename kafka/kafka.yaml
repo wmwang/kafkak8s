@@ -5,7 +5,7 @@ metadata:
   labels:
     app: kafka-g
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: kafka-a
@@ -21,7 +21,7 @@ spec:
         - containerPort: 9092
         env:
         - name: KAFKA_BROKER_ID
-          value: "2"
+          value: "1"
         - name: KAFKA_ZOOKEEPER_CONNECT
           value: "zookeeper-c:2181"
         - name: ALLOW_PLAINTEXT_LISTENER
@@ -30,6 +30,30 @@ spec:
           value: PLAINTEXT://:9092
         - name: KAFKA_ADVERTISED_LISTENERS
           value: PLAINTEXT://kafka-b:9092
+  selector:
+    matchLabels:
+      app: kafka-b
+  template:
+    metadata:
+      labels:
+        app: kafka-b
+    spec:
+      containers:
+      - name: kafka1
+        image: bitnami/kafka:latest
+        ports:
+        - containerPort: 9093
+        env:
+        - name: KAFKA_BROKER_ID
+          value: "2"
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: "zookeeper-c:2181"
+        - name: ALLOW_PLAINTEXT_LISTENER
+          value: "yes"
+        - name: KAFKA_LISTENERS
+          value: PLAINTEXT://:9093
+        - name: KAFKA_ADVERTISED_LISTENERS
+          value: PLAINTEXT://kafka-b:9093
 ---
 apiVersion: v1
 kind: Service
