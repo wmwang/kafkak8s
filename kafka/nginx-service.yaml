@@ -10,3 +10,19 @@ spec:
     port: 80
     targetPort: 80
   type: NodePort # 如果需要外部訪問，選擇 NodePort 或 LoadBalancer
+
+---
+
+  apiVersion: v1
+kind: Service
+metadata:
+  name: nginx---
+spec:
+  selector:
+    app: nginx---
+  ports:
+  - protocol: TCP
+    port: 81
+    targetPort: 81
+  type: NodePort # 如果需要外部訪問，選擇 NodePort 或 LoadBalancer
+

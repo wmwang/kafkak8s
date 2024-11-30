@@ -59,3 +59,64 @@ data:
     }
 
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-yahoo
+  labels:
+    app: nginx-yahoo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-yahoo
+  template:
+    metadata:
+      labels:
+        app: nginx-yahoo
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 81
+        volumeMounts:
+        - name: nginx-config-volume-2
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: nginx-config-volume-2
+        configMap:
+          name: config-yahoo
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-yahoo
+data:
+  nginx.conf: |
+    user  nginx;
+    worker_processes  1;
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+    events {
+      worker_connections  1024;
+    }
+    http {
+      sendfile        on;
+      keepalive_timeout  65;
+      server {
+        listen       81;
+        server_name  localhost;
+        location / {
+          proxy_pass https://tw.news.yahoo.com/;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+          root   /usr/share/nginx/html;
+        }
+      }
+    }
+
+---
