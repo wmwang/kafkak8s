@@ -1,19 +1,25 @@
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: traffic-split
+  name: traffic-split-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "50" # 50% 流量
 spec:
-  hosts:
-  - "*"
-  http:
-  - route:
-    - destination:
-        host: my-service
-        port:
-          number: 80
-      weight: 50
-    - destination:
-        host: my-service
-        port:
-          number: 81
-      weight: 50
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-yahoo
+            port:
+              number: 81
