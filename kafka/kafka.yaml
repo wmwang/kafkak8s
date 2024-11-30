@@ -64,6 +64,16 @@ spec:
         - name: KAFKA_ADVERTISED_LISTENERS
           value: PLAINTEXT://kafka-b:9093
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-a
+spec:
+  ports:
+  - port: 9092
+    targetPort: 9092
+  selector:
+    app: kafka-a
 ---
 apiVersion: v1
 kind: Service
@@ -71,7 +81,7 @@ metadata:
   name: kafka-b
 spec:
   ports:
-  - port: 9092
-    targetPort: 9092
+  - port: 9093
+    targetPort: 9093
   selector:
-    app: kafka-a
+    app: kafka-b
