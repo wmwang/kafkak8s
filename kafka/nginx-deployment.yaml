@@ -79,7 +79,7 @@ spec:
       - name: nginx
         image: nginx:latest
         ports:
-        - containerPort: 81
+        - containerPort: 80
         volumeMounts:
         - name: nginx-config-volume-2
           mountPath: /etc/nginx/nginx.conf
@@ -107,7 +107,7 @@ data:
       sendfile        on;
       keepalive_timeout  65;
       server {
-        listen       81;
+        listen       80;
         server_name  localhost;
         location / {
           proxy_pass https://tw.news.yahoo.com/;

@@ -22,7 +22,7 @@ spec:
     app: nginx-yahoo
   ports:
   - protocol: TCP
-    port: 81
-    targetPort: 81
+    port: 80
+    targetPort: 80
   type: NodePort # 如果需要外部訪問，選擇 NodePort 或 LoadBalancer
 
