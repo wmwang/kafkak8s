@@ -26,4 +26,33 @@ spec:
       volumes:
       - name: nginx-config-volume
         configMap:
-          name: nginx-config
+          name: nginx-proxy-config
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-proxy-config
+data:
+  nginx.conf: |
+    events {
+        worker_connections 1024;
+    }
+    
+    http {
+        upstream backend {
+            server destination-service.default.svc.cluster.local:8080;
+        }
+
+        server {
+            listen 80;
+            listen       [::]:80;
+            server_name  www.google.com;
+            location / {
+                proxy_pass http://www.google.com;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+            }
+        }
+    }
