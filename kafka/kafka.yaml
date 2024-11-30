@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kafka-f
+  name: kafka-1
   labels:
-    app: kafka-g
+    app: kafka
 spec:
   replicas: 2
   selector:
@@ -29,7 +29,15 @@ spec:
         - name: KAFKA_LISTENERS
           value: PLAINTEXT://:9092
         - name: KAFKA_ADVERTISED_LISTENERS
-          value: PLAINTEXT://kafka-b:9092
+          value: PLAINTEXT://kafka-a:9092
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-2
+  labels:
+    app: kafka
+spec:
+  replicas: 1
   selector:
     matchLabels:
       app: kafka-b
@@ -54,6 +62,7 @@ spec:
           value: PLAINTEXT://:9093
         - name: KAFKA_ADVERTISED_LISTENERS
           value: PLAINTEXT://kafka-b:9093
+---
 ---
 apiVersion: v1
 kind: Service
