@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kafka-a
+  name: kafka-b
   labels:
     app: kafka-a
 spec:
