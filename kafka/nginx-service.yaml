@@ -7,6 +7,6 @@ spec:
     app: nginx
   ports:
   - protocol: TCP
-    port: 999
+    port: 80
     targetPort: 80
-  type: NodePLoadBalancerort # 如果需要外部訪問，選擇 NodePort 或 LoadBalancer
+  type: NodePort # 如果需要外部訪問，選擇 NodePort 或 LoadBalancer
