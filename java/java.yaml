@@ -5,7 +5,6 @@ metadata:
   labels:
     app: runtime
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: runtime
