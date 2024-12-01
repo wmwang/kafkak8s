@@ -8,7 +8,8 @@ spec:
   containers:
   - name: openjdk7
     image: openjdk:7-jdk
-    command: ["sh", "-c", "while true; do echo 'OpenJDK 8 running'; sleep 3600; done"]
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do sleep 30; done"]
 
 ---
 apiVersion: v1
@@ -21,4 +22,5 @@ spec:
   containers:
   - name: openjdk21
     image: openjdk:21-jdk
-    command: ["java", "-version"]
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do sleep 30; done"]
