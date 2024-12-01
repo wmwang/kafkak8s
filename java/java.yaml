@@ -1,25 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: runtime
+  name: openjdk7-deployment
   labels:
-    app: runtime
+    app: openjdk7
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: runtime
+      app: openjdk7
   template:
     metadata:
       labels:
-        app: runtime
+        app: openjdk7
     spec:
       containers:
       - name: openjdk7
         image: openjdk:7-jdk
         command: ["/bin/sh"]
         args: ["-c", "while true; do sleep 30; done"]
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openjdk21-deployment
+  labels:
+    app: openjdk21
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openjdk21
+  template:
+    metadata:
+      labels:
+        app: openjdk21
+    spec:
+      containers:
       - name: openjdk21
         image: openjdk:21-jdk
         command: ["/bin/sh"]
         args: ["-c", "while true; do sleep 30; done"]
-
