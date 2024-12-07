@@ -17,7 +17,7 @@ spec:
       containers:
       - name: openjdk7
         image: openjdk:7-jdk
-        command: ["/bin/sh"]
+        command: ["/bin/sh
         args: ["-c", "while true; do sleep 30; done"]
 
 ---
